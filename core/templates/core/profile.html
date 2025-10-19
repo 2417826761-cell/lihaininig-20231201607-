@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+
+{% block title %}个人资料 - 我的Django项目{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h3>个人资料</h3>
+            </div>
+            <div class="card-body text-center">
+                {% if user.avatar %}
+                <img src="{{ user.avatar.url }}" alt="头像" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
+                {% else %}
+                <div class="bg-secondary text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3" style="width: 150px; height: 150px;">
+                    <span style="font-size: 60px;">{{ user.username.0|upper }}</span>
+                </div>
+                {% endif %}
+                <h4>{{ user.username }}</h4>
+                <p>{{ user.email }}</p>
+                {% if user.bio %}
+                <p>{{ user.bio }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3>账户信息</h3>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <tr>
+                        <th>用户名:</th>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <th>邮箱:</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>手机号码:</th>
+                        <td>{{ user.phone|default:"未设置" }}</td>
+                    </tr>
+                    <tr>
+                        <th>注册时间:</th>
+                        <td>{{ user.date_joined|date:"Y-m-d H:i" }}</td>
+                    </tr>
+                    <tr>
+                        <th>最后登录:</th>
+                        <td>{{ user.last_login|date:"Y-m-d H:i" }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
