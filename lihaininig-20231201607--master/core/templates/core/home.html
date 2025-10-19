@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+
+{% block title %}首页 - 我的Django项目{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">欢迎来到我的Django项目!</h1>
+    <p class="lead">这是一个基于Django的Web应用程序，提供用户注册、登录和个人资料管理功能。</p>
+    <hr class="my-4">
+    <p>开始使用我们的应用程序，请注册一个账户或登录。</p>
+    {% if not user.is_authenticated %}
+    <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">立即注册</a>
+    <a class="btn btn-outline-primary btn-lg" href="{% url 'login' %}" role="button">登录</a>
+    {% else %}
+    <a class="btn btn-primary btn-lg" href="{% url 'profile' %}" role="button">查看个人资料</a>
+    {% endif %}
+</div>
+{% endblock %}
